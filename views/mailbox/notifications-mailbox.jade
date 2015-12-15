@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .row.row-offcanvas-left
+    .col-xs-6.col-sm-3.sidebar-offcanvas
+      include layout/menu
+      
+    .col-xs-12.col-sm-9
+      .list-group
+      each notification in mailbox.notifications
+        a.list-group-item(href="#")
+          if notification.type == "sms"
+            i.fa.fa-mobile.pull-right.fa-3x
+            h4.list-group-item-heading SMS
+            p.list-group-item-text Tel : #{notification.phone_number}
+          if notification.type == "email"
+            i.fa.fa-envelope.pull-right.fa-2x
+            h4.list-group-item-heading Mail
+            p.list-group-item-text Email : #{notification.email}
+            
+          form.form-horizontal(id='mailbox-form', action="/mailbox/notification", method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            input(type='hidden', name='_method', value="delete")
+            input(type='hidden', name='id', value="#{mailbox._id}")
+            input(type='hidden', name='id_notification', value="#{notification._id}")
+          a(role="menuitem", tabindex="-1", type='submit', onclick='$( "#mailbox-form" ).submit()') Remove Notification
+
+      
+      hr
+      .col-md-2.col-md-offset-5
+        div.dropdown
+          button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenu1", data-toggle="dropdown", aria-expanded="true") Action 
+            span.caret   
+          ul.dropdown-menu(role="menu")
+            li(role="presentation")
+              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/sms") Add SMS notification
+              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/email") Add Email notification

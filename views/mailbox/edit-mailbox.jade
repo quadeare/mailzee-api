@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  .row.row-offcanvas-left
+    .col-xs-6.col-sm-3.sidebar-offcanvas
+      include layout/menu
+      
+    if page === "#notifications"
+      .col-xs-12.col-sm-9
+        P notifications
+        
+        
+    if page === "#edit"
+      .col-xs-12.col-sm-9
+        P edit
+    

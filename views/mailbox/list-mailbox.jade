@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  .row
+    if !user.mailboxes
+      center
+        p.lead No mailbox registered on your account. Add one by clicking on the button below.
+    else
+      ul
+        each mailbox in user.mailboxes
+          .panel.panel-primary 
+            .panel-heading
+                h3(class='panel-title') #{mailbox.name}
+                  .pull-right
+                    div.dropdown
+                      button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenu1", data-toggle="dropdown", aria-expanded="true") Action 
+                        span.caret
+                      ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenu1")
+                        li(role="presentation")
+                          a(role="menuitem", tabindex="-1", href="/mailbox/#{mailbox._id}/notifications") Edit
+                          form.form-horizontal(id='mailbox-form', action="/mailbox", method='POST')
+                            input(type='hidden', name='_csrf', value=_csrf)
+                            input(type='hidden', name='_method', value="delete")
+                            input(type='hidden', name='id', value="#{mailbox._id}")
+                          a(role="menuitem", tabindex="-1", type='submit', onclick='$( "#mailbox-form" ).submit()') Delete Mailbox
+                          
+            .panel-body
+              p Mailbox ID : #{mailbox._id}
+              p Mailbox Device Type : #{mailbox.deviceType}
+              p Mailbox name : #{mailbox.name}
+              p Mailbox Device ID : #{mailbox.deviceId}
+              p Mailbox Sigfox ID : #{mailbox.sigfoxId}
+              
+              
+              
+              
+              
+    center          
+      a(href='/form-add-mailbox')
+        button.btn.btn-success
+          i.fa.fa-plus
+          | Attach a new mailbox

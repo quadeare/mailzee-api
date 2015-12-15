@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+    
+  .row  
+    form.form-horizontal(id='mailbox-form', action="mailbox", method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        label.col-sm-3.control-label(for='text') Type device
+        .col-sm-7
+          input.form-control(type='text', name='deviceType', id='deviceType', placeholder='Type device', value='sigfox', readonly)
+      .form-group
+        label.col-sm-3.control-label(for='text') Mailbox name
+        .col-sm-7
+          input.form-control(type='text', name='mailboxName', id='mailboxName', placeholder='Mailbox name', autofocus)
+      .form-group
+        label.col-sm-3.control-label(for='text') Device ID
+        .col-sm-7
+          input.form-control(type='text', name='deviceId', id='deviceId', placeholder='Device ID')
+      .form-group
+        label.col-sm-3.control-label(for='text') Sigfox ID
+        .col-sm-7
+          input.form-control(type='text', name='sigfoxId', id='sigfoxId', placeholder='Sigfox ID')
+          
+      .form-group
+        .col-sm-offset-3.col-sm-7
+          button.btn.btn-success(type='submit')
+            i.fa.fa-user-plus
+            | Add new mailbox

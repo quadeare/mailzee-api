@@ -9,7 +9,7 @@ var smsServices = require('../services/sms');
 exports.addMailBox = function(req, res, next) {
   //req.assert('deviceType', 'Device Type is not valid').len(4);
   req.assert('mailboxName', 'Device ID is not valid').len(4);
-  req.assert('deviceId', 'Device ID is not valid').len(4);
+  //req.assert('deviceId', 'Device ID is not valid').len(4);
 
   var errors = req.validationErrors();
 
@@ -257,8 +257,13 @@ exports.removeNotification = function(req, res, next) {
 exports.sigfoxNewMail = function(req, res, next) {
 
   var sigfoxId = req.params.sigfoxId;
-  var data = JSON.parse(req.params.data);
-  var deviceId = data.D;
+  var data = hex2a(req.params.data);
+
+  var regex = new RegExp('(\\d+).*?(\\d+)',["i"]);
+  var m = regex.exec(data);
+
+  var deviceId=m[1];
+  var instructionId=m[2];
 
   var condition = {
     deviceType: "sigfox",
@@ -285,4 +290,12 @@ exports.sigfoxNewMail = function(req, res, next) {
     }
   })
 
+}
+
+function hex2a(hexx) {
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; i < hex.length; i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    return str;
 }

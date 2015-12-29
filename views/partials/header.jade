@@ -1,35 +1,55 @@
-.navbar.navbar-default.navbar-fixed-top
+// Header starts
+header
   .container
-    .navbar-header
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(href='/')
-        i.fa.fa-cube
-        | Pudu Mail
-    .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li(class=title=='Home'?'active':undefined)
-          a(href='/') Home
-        if user
-          li(class=title=='Mailbox'?'active':undefined)
-            a(href='/mailbox/list') Mailbox
-      ul.nav.navbar-nav.navbar-right
-        if !user
-          li(class=title=='Login'?'active':undefined)
-            a(href='/login') Login
-          li(class=title=='Create Account'?'active':undefined)
-            a(href='/signup') Create Account
-        else
-          li.dropdown(class=title=='Account Management'?'active':undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
+    .row
+      .col-md-4.col-sm-4
+        // Logo and site link
+        .logo
+          h1
+            a(href='index.html')
+              | Mailzee
+              span.color .
+              | com
+      .col-md-4.col-sm-4.col-sm-offset-4.col-md-offset-4
+          if user
+            .profil
               if user.profile.picture
                 img(src='#{user.profile.picture}')
               else
                 img(src='#{user.gravatar(60)}')
-              | #{user.profile.name || user.email || user.id}&nbsp;
+              | #{user.profile.name || user.email || user.id}
+// / Header ends
+// Navigation Starts
+// Note down the syntax before editing. It is the default twitter bootstrap navigation
+.navbar.bs-docs-nav(role='banner')
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      // Navigation links starts here
+      ul.nav.navbar-nav
+        li(class=title=='Home'?'active':undefined).dropdown
+          a(href='/')
+            | Home 
+        // Navigation with sub menu. Please note down the syntax before you need. Each and every link is important.
+        if user
+          li(class=title=='Mailbox'?'active':undefined).dropdown
+            a.dropdown-toggle(href='/mailbox/list', data-toggle='dropdown')
+              | Mailbox 
+              b.caret
+            // Submenus
+            ul.dropdown-menu
+              li
+                a(href='/mailbox/list') List
+
+        if user
+          li.dropdown(class=title=='Account Management'?'active':undefined)
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | My account 
               i.caret
             ul.dropdown-menu
               li
@@ -37,3 +57,11 @@
               li.divider
               li
                 a(href='/logout') Logout
+        else
+          li(class=title=='Login'?'active':undefined).dropdown
+            a.dropdown-toggle(href='/login') Login 
+          li(class=title=='Create Account'?'active':undefined).dropdown
+            a.dropdown-toggle(href='/signup')
+              | Create account 
+              
+        

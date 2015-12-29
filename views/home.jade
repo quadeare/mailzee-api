@@ -1,8 +1,96 @@
 extends layout
-
 block content
-  h1 Pudu Mail
-  p.lead Welcome on Pudu Mail platform
-  hr
-  .row
-    p << Zone HOME à remplir >>
+  .container
+    // Slider Starts
+    .tp-banner-container
+      .tp-banner
+        ul
+          // SLIDE
+          li(data-transition='flyin', data-slotamount='4', data-masterspeed='300')
+            // MAIN IMAGE
+            img(src='img/slider/slide1.jpg', alt='', data-bgposition='left top', data-duration='2000', data-bgfit='200', data-bgfitend='100')
+            // LAYER NR. 1
+            .tp-caption.modern_big_redbg.skewfromleftshort.customout(data-x='90', data-y='80', data-customout='x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;', data-speed='800', data-start='1000', data-easing='Back.easeOut', data-endspeed='500', data-endeasing='Power4.easeIn', data-captionhidden='on', style='z-index: 1')
+              | Under development
+            // LAYER NR. 1.1
+            .tp-caption.very_large_text.customin.customout.heading(data-x='85', data-y='145', data-splitin='chars', data-elementdelay='0.05', data-start='1200', data-speed='1500', data-easing='Back.easeOut', data-customin='x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;', data-splitout='lines', data-endelementdelay='0.1', data-customout='x:-230;y:-20;z:0;rotationX:0;rotationY:0;rotationZ:90;scaleX:0.2;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%', data-endspeed='500', data-endeasing='Back.easeIn', data-captionhidden='on', style='z-index: 1')
+              | Smart Mail box
+            // LAYER NR. 2
+            .tp-caption.large_text.lfl.paragraph(data-x='90', data-hoffset='0', data-y='225', data-speed='600', data-start='2000', data-easing='Circ.easeOut', data-endspeed='300', style='z-index: 2')
+              | Mailzee is a smart mailbox specifically designed 
+              br
+              | for mail notification and mailbox sharing. It uses Sigfox 
+              br
+              | communication and it works everywhere in Europe !
+            // LAYER NR. 3
+            .tp-caption.sfb(data-x='90', data-hoffset='0', data-y='360', data-voffset='0', data-speed='600', data-start='2500', data-easing='Circ.easeOut', data-endspeed='300', style='z-index: 3')
+              a.btn.btn-danger.hidden-xs(href='#') Get Features
+            // LAYERS NR. 4
+            .tp-caption.lfr(data-x='right', data-hoffset='-130', data-y='110', data-speed='800', data-start='3200', data-easing='Power4.easeOut', data-endspeed='300', data-endeasing='Linear.easeNone', data-captionhidden='off', style='z-index: 4')
+              img.img-responsive(src='http://www.centrecommercial-partdieu.com/W/cms_sites/images/pictoServiceV3/web_1380880124486_POSTE.png', alt='')
+          
+    // / Slider End
+    .bor
+    .main-content
+      .row
+        .col-md-7
+          h2 Mailzee presentation
+          p.main-meta Mailzee presentation
+          p
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate eros nec odio egestas in dictum nisi vehicula. Pellentesque habitant morbi tristique senectus et ac turpis egestas. Suspendisse porttitor luctus imperdiet. 
+            a(href='#') Praesent ultricies
+            |  enim ac ipsum aliquet pellentesque. Nullam justo nunc, dignissim at convallis posuere, sodales eu orci. Duis a risus sed dolor placerat semper quis in urna. Nam risus magna, fringilla sit amet blandit viverra, dignissim eget est. Ut 
+            strong commodo ullamcorper risus nec
+            |  mattis. Aenean at massa leo. Vestibulum in varius arcu.
+        .col-md-5
+          .main-box
+            h4 Features
+            p
+              | Features listing
+            ul
+              li
+                i.fa.fa-angle-right
+                |  Feature 1
+              li
+                i.fa.fa-angle-right
+                |  Feature 2
+              li
+                i.fa.fa-angle-right
+                |  Feature 3
+    
+    // / CTA Ends
+    // Features list. Note down the class name before editing.
+    .row
+      .col-md-3.col-sm-6
+        .afeature
+          .afmatter
+            i.fa.fa-cloud
+            h4 Feature 1
+            p
+              | Feature 1 presentation
+      .col-md-3.col-sm-6
+        .afeature
+          .afmatter
+            i.fa.fa-home
+            h4 Feature 2
+            p
+              | Feature 2 presentation
+      .col-md-3.col-sm-6
+        .afeature
+          .afmatter
+            i.fa.fa-gift
+            h4 Feature 3
+            p
+              | Feature 3 presentation
+      .col-md-3.col-sm-6
+        .afeature
+          .afmatter
+            i.fa.fa-user
+            h4 Feature 4
+            p
+              | Feature 4 presentation
+    // Features ends
+    
+    
+    
+    

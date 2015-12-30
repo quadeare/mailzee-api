@@ -23,13 +23,13 @@ module.exports = {
 
   db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test',
 
-  sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
+  sessionSecret: process.env.SESSION_SECRET || 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce',
 
   mailgun: {
     user: process.env.MAILGUN_USER || 'postmaster@sandbox697fcddc09814c6b83718b9fd5d4e5dc.mailgun.org',
     password: process.env.MAILGUN_PASSWORD || '29eldds1uri6'
   },
-  
+
   mandrill: {
     user: process.env.MANDRILL_USER || 'hackathonstarterdemo',
     password: process.env.MANDRILL_PASSWORD || 'E1K950_ydLR4mHw12a0ldA'
@@ -50,8 +50,8 @@ module.exports = {
   },
 
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '754220301289665',
-    clientSecret: process.env.FACEBOOK_SECRET || '41860e58c256a3d7ad8267d3c1939a4a',
+    clientID: process.env.FACEBOOK_ID || '548134908724868',
+    clientSecret: process.env.FACEBOOK_SECRET || 'dd0d55a4b426b539577c705f137eb4e2',
     callbackURL: '/auth/facebook/callback',
     passReqToCallback: true
   },

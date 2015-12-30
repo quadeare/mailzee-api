@@ -4,4 +4,8 @@ ul.nav.nav-pills.nav-stacked
   li(role="presentation",class=subtitle=='Edit'?'active':undefined)
     a(href="/mailbox/#{mailbox.id}/edit") Edit Mailbox
   li(role="presentation")
-    a(href="#") Delete Mailbox
+    form.form-horizontal(id='mailbox-delete-form', action="/mailbox", method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      input(type='hidden', name='_method', value="delete")
+      input(type='hidden', name='id', value="#{mailbox._id}")
+    a(role="menuitem", tabindex="-1", type='submit', onclick='$( "#mailbox-delete-form" ).submit()') Delete Mailbox

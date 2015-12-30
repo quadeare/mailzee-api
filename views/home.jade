@@ -2,7 +2,7 @@ extends layout
 block content
   .container
     // Slider Starts
-    .tp-banner-container
+    #slider.tp-banner-container
       .tp-banner
         ul
           // SLIDE
@@ -10,20 +10,20 @@ block content
             // MAIN IMAGE
             img(src='img/slider/slide1.jpg', alt='', data-bgposition='left top', data-duration='2000', data-bgfit='200', data-bgfitend='100')
             // LAYER NR. 1
-            .tp-caption.modern_big_redbg.skewfromleftshort.customout(data-x='90', data-y='80', data-customout='x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;', data-speed='800', data-start='1000', data-easing='Back.easeOut', data-endspeed='500', data-endeasing='Power4.easeIn', data-captionhidden='on', style='z-index: 1')
+            .tp-caption.modern_big_redbg.skewfromleftshort.customout(data-x='60', data-y='20', data-customout='x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;', data-speed='800', data-start='1000', data-easing='Back.easeOut', data-endspeed='500', data-endeasing='Power4.easeIn', data-captionhidden='on', style='z-index: 1')
               | Under development
             // LAYER NR. 1.1
-            .tp-caption.very_large_text.customin.customout.heading(data-x='85', data-y='145', data-splitin='chars', data-elementdelay='0.05', data-start='1200', data-speed='1500', data-easing='Back.easeOut', data-customin='x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;', data-splitout='lines', data-endelementdelay='0.1', data-customout='x:-230;y:-20;z:0;rotationX:0;rotationY:0;rotationZ:90;scaleX:0.2;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%', data-endspeed='500', data-endeasing='Back.easeIn', data-captionhidden='on', style='z-index: 1')
+            .tp-caption.very_large_text.customin.customout.heading(data-x='65', data-y='80', data-splitin='chars', data-elementdelay='0.05', data-start='1200', data-speed='1500', data-easing='Back.easeOut', data-customin='x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;', data-splitout='lines', data-endelementdelay='0.1', data-customout='x:-230;y:-20;z:0;rotationX:0;rotationY:0;rotationZ:90;scaleX:0.2;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%', data-endspeed='500', data-endeasing='Back.easeIn', data-captionhidden='on', style='z-index: 1')
               | Smart Mail box
             // LAYER NR. 2
-            .tp-caption.large_text.lfl.paragraph(data-x='90', data-hoffset='0', data-y='225', data-speed='600', data-start='2000', data-easing='Circ.easeOut', data-endspeed='300', style='z-index: 2')
+            .tp-caption.large_text.lfl.paragraph(data-x='65', data-y='150', data-speed='600', data-start='2000', data-easing='Circ.easeOut', data-endspeed='300', style='z-index: 2')
               | Mailzee is a smart mailbox specifically designed 
               br
               | for mail notification and mailbox sharing. It uses Sigfox 
               br
               | communication and it works everywhere in Europe !
             // LAYER NR. 3
-            .tp-caption.sfb(data-x='90', data-hoffset='0', data-y='360', data-voffset='0', data-speed='600', data-start='2500', data-easing='Circ.easeOut', data-endspeed='300', style='z-index: 3')
+            .tp-caption.sfb(data-x='1050', data-hoffset='0', data-y='230', data-voffset='0', data-speed='600', data-start='2500', data-easing='Circ.easeOut', data-endspeed='300', style='z-index: 3')
               a.btn.btn-danger.hidden-xs(href='#') Get Features
             // LAYERS NR. 4
             .tp-caption.lfr(data-x='right', data-hoffset='-130', data-y='110', data-speed='800', data-start='3200', data-easing='Power4.easeOut', data-endspeed='300', data-endeasing='Linear.easeNone', data-captionhidden='off', style='z-index: 4')
@@ -65,30 +65,30 @@ block content
         .afeature
           .afmatter
             i.fa.fa-cloud
-            h4 Feature 1
+            h4 Send notification
             p
-              | Feature 1 presentation
+              | Send notification on your smartphone or computer when you receive mail.
       .col-md-3.col-sm-6
         .afeature
           .afmatter
             i.fa.fa-home
-            h4 Feature 2
+            h4 Alert other people
             p
-              | Feature 2 presentation
+              | You can set notifications to your friends or family when you receive mail.
       .col-md-3.col-sm-6
         .afeature
           .afmatter
             i.fa.fa-gift
-            h4 Feature 3
+            h4 Wireless
             p
-              | Feature 3 presentation
+              | Mailzee box is wireless and easy to install
       .col-md-3.col-sm-6
         .afeature
           .afmatter
             i.fa.fa-user
-            h4 Feature 4
+            h4 Developer
             p
-              | Feature 4 presentation
+              | You can set callbacks URL to notify your solutions
     // Features ends
     
     

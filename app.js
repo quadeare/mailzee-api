@@ -109,23 +109,9 @@ app.use(methodOverride(function(req, res){
 }))
 
 
-// routes
+// Routes
 require('./routes/oauth')(app, oauth2, passport, apiController, passportConf);
 require('./routes/website')(app, oauth2, passport, homeController, userController, passportConf, contactController, mailboxController);
-
-
-// app.use(lusca.csrf()); /!\
-
-app.get('/test',
-  passport.authenticate(['bearer'], { session: false }),
-  function(req, res) {
-    if(req.authInfo.http_code) {
-      res.status(req.authInfo.http_code) && res.json(req.authInfo);
-    }else{
-      res.send(req.user);
-    }
-
-  });
 
 
 /**
@@ -136,7 +122,7 @@ app.use(errorHandler());
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), '127.0.0.1', function() {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
 

@@ -7,7 +7,7 @@ var compress = require('compression');
 var favicon = require('serve-favicon');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
+var morgan = require('morgan');
 var errorHandler = require('errorhandler');
 var lusca = require('lusca');
 var methodOverride = require('method-override');
@@ -67,7 +67,6 @@ app.use(sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(logger('dev'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -117,13 +116,31 @@ require('./routes/website')(app, oauth2, passport, homeController, userControlle
 /**
  * Error Handler.
  */
-app.use(errorHandler());
+if ('development' == app.get('env')) {
+   app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+   morgan('combined', {
+   skip: function (req, res) { return res.statusCode < 400 }
+ })
+ };
+
+if ('production' == app.get('env')) {
+  app.use(errorHandler());
+    morgan('combined', {
+    skip: function (req, res) { return res.statusCode < 400 }
+  })
+ };
 
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), '127.0.0.1', function() {
-  console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
-});
+ app.listen(app.get('port'), '127.0.0.1', function() {
+   console.log('Express server listening on localhost port %d in %s mode', app.get('port'), app.get('env'));
+ });
+
+ // Docker IP
+var docker_ip = app.listen(app.get('port'), '172.17.42.1');
+docker_ip.on('error', function(err){
+    console.log(err)
+})
 
 module.exports = app;

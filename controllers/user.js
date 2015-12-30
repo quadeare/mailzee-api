@@ -57,7 +57,7 @@ exports.postLogin = function(req, res, next) {
         return next(err);
       }
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/mailbox');
+      res.redirect(req.session.returnTo || '/mailbox/list');
     });
   })(req, res, next);
 };
@@ -118,7 +118,7 @@ exports.postSignup = function(req, res, next) {
         if (err) {
           return next(err);
         }
-        res.redirect('/mailbox');
+        res.redirect('/mailbox/list');
       });
     });
   });

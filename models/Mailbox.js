@@ -9,7 +9,8 @@ var mailbox_schema = new mongoose.Schema({
   notifications: [{
     type: { type: String, default: '' },
     phone_number: { type: String },
-    email: { type: String }
+    email: { type: String },
+    gcm_id: { type: String }
   }]
 });
 

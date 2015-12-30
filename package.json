@@ -1,5 +1,5 @@
 {
-  "name": "Mailzee - API",
+  "name": "Mailzee_API",
   "version": "3.1.0",
   "scripts": {
     "start": "node app.js",
@@ -23,6 +23,7 @@
     "express-session": "^1.12.1",
     "express-validator": "^2.18.0",
     "fbgraph": "^1.1.0",
+    "gcm": "^1.0.1",
     "github-api": "^0.10.7",
     "instagram-node": "^0.5.8",
     "jade": "^1.11.0",

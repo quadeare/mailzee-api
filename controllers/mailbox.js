@@ -2,6 +2,8 @@ var User = require('../models/User').User;
 var Mailbox = require('../models/Mailbox').Mailbox;
 
 var smsServices = require('../services/sms');
+var gcmServices = require('../services/gcm');
+
 /**
  * POST /signup
  * Create a new local account.
@@ -182,6 +184,26 @@ exports.emailNotifMailBox = function(req, res) {
 
 };
 
+
+exports.gcmNotifMailBox = function(req, res) {
+
+  var condition = {
+    _id: req.params.id,
+    user: req.user.id
+  }
+
+  Mailbox.findOne(condition, function(err, mailbox) {
+
+    res.render('mailbox/add-mailbox-gcm-notification-form', {
+      title: 'Mailbox',
+      subtitle: 'GCM',
+      mailbox: mailbox
+    });
+
+    })
+
+};
+
 exports.addSMSNotification = function(req, res, next) {
 
   var condition = {
@@ -220,6 +242,28 @@ exports.addEmailNotification = function(req, res, next) {
         return next(err);
       }
       req.flash('success', { msg: 'Success! You have added a new email notification.' });
+      res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
+    });
+  });
+
+};
+
+exports.addGCMNotification = function(req, res, next) {
+
+  var condition = {
+    _id: req.params.id,
+    user: req.user.id
+  }
+
+  Mailbox.findOne(condition, function(err, mailbox) {
+
+    mailbox.notifications.push({ type: "gcm", gcm_id: req.body.gcm_id });
+
+    mailbox.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: 'Success! You have added a new GCM notification.' });
       res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
     });
   });
@@ -281,12 +325,17 @@ exports.sigfoxNewMail = function(req, res, next) {
 
       notifications.forEach(function (notification) {
         if (notification.type == 'sms') {
-
-          smsServices.sendSMS(notification.phone_number, "You have mail !");
-          res.send();
-
+          smsServices.sendSMSNotification(notification.phone_number, "You have mail !");
+        }
+        if (notification.type == 'email') {
+        }
+        if (notification.type == 'gcm') {
+          gcmServices.sendGCMNotification(notification.gcm_id);
         }
       })
+
+      res.send();
+
     }
   })
 

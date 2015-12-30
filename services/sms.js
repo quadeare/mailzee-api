@@ -1,6 +1,6 @@
 var request = require('request');
 
-exports.sendSMS = function(phone_number, message, res) {
+exports.sendSMSNotification = function(phone_number, message, res) {
 
   request.post(
       'http://smsgateway.me/api/v3/messages/send',
@@ -13,7 +13,7 @@ exports.sendSMS = function(phone_number, message, res) {
       } },
       function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            
+
           }
       }
   );

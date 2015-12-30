@@ -9,16 +9,20 @@ block content
       .list-group
         each notification in mailbox.notifications
           div.list-group-item(href="#").notification-item
-            if notification.type == "sms"
-              i.fa.fa-mobile.pull-left.fa-3x
-              h4.list-group-item-heading SMS
-              p.list-group-item-text Tel : #{notification.phone_number}
-            if notification.type == "email"
-              i.fa.fa-envelope.pull-left.fa-2x
-              h4.list-group-item-heading Mail
-              p.list-group-item-text Email : #{notification.email}
+              if notification.type == "sms"
+                i.fa.fa-mobile.pull-left.fa-3x
+                h4.list-group-item-heading SMS
+                p.list-group-item-text Tel : #{notification.phone_number}
+              if notification.type == "email"
+                i.fa.fa-envelope.pull-left.fa-2x
+                h4.list-group-item-heading Mail
+                p.list-group-item-text Email : #{notification.email}
+              if notification.type == "gcm"
+                i.fa.fa-mobile.pull-left.fa-3x
+                h4.list-group-item-heading GCM
+                p.list-group-item-text GCM : #{notification.gcm_id}
 
-            div.dropdown.pull-right(style="margin-top: -40px")
+            div.dropdown.pull-right.notification-dropdown
               button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenu1", data-toggle="dropdown", aria-expanded="true") Action 
                 span.caret   
               ul.dropdown-menu(role="menu")
@@ -50,3 +54,6 @@ block content
               a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/email")
                 i.fa.fa-envelope
                 | Add an Email notification
+              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/gcm")
+                i.fa.fa-mobile.fa-lg
+                | Add a GCM notification

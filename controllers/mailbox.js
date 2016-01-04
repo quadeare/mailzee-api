@@ -205,6 +205,25 @@ exports.gcmNotifMailBox = function(req, res) {
 
 };
 
+exports.chromeNotifMailBox = function(req, res) {
+
+  var condition = {
+    _id: req.params.id,
+    user: req.user.id
+  }
+
+  Mailbox.findOne(condition, function(err, mailbox) {
+
+    res.render('mailbox/add-mailbox-chrome-notification-form', {
+      title: 'Mailbox',
+      subtitle: 'GCM',
+      mailbox: mailbox
+    });
+
+    })
+
+};
+
 exports.addSMSNotification = function(req, res, next) {
 
   var condition = {
@@ -251,6 +270,15 @@ exports.addEmailNotification = function(req, res, next) {
 
 exports.addGCMNotification = function(req, res, next) {
 
+  req.assert('gcm_id', 'GCM ID is not valid').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/mailbox/list');
+  }
+
   var condition = {
     _id: req.params.id,
     user: req.user.id
@@ -270,7 +298,6 @@ exports.addGCMNotification = function(req, res, next) {
   });
 
 };
-
 
 exports.removeNotification = function(req, res, next) {
 

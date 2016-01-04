@@ -21,6 +21,10 @@ block content
                 i.fa.fa-mobile.pull-left.fa-3x
                 h4.list-group-item-heading GCM
                 p.list-group-item-text GCM : #{notification.gcm_id}
+              if notification.type == "chrome"
+                i.fa.fa-mobile.pull-left.fa-3x
+                h4.list-group-item-heading GCM
+                p.list-group-item-text GCM : #{notification.gcm_id}
                 
             div.dropdown.pull-right.notification-dropdown
               button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenu1", data-toggle="dropdown", aria-expanded="true") Action 
@@ -57,3 +61,13 @@ block content
               a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/gcm")
                 i.fa.fa-mobile.fa-lg
                 | Add a GCM notification
+              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/chrome")
+                i.fa.fa-mobile.fa-lg
+                | Add a Chrome notification
+              //- form.form-horizontal(id='mailbox-form', action="/mailbox/notification/chrome", method='POST')
+              //-   input(type='hidden', name='_csrf', value=_csrf)
+              //-   input(type='hidden', name='id', value="#{mailbox._id}")
+              //-   input(type='hidden', name='gcm_id', value="#{notification._id}")
+              //- a(role="menuitem", href="#", tabindex="-1", type='submit', onclick='$( "#mailbox-form" ).submit()') 
+              //-   i.fa.fa-trash
+              //-   | Add a Chrome notification

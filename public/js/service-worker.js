@@ -1,24 +1,39 @@
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/js/service-worker.js').then(function(registration) {
-	// Registration was successful
-	console.log('ServiceWorker registration successful with scope: ',    registration.scope);
-	registration.pushManager.subscribe().then(function(subscription){
-	isPushEnabled = true;
-	console.log("subscription.subscriptionId: ", subscription.subscriptionId);
-	console.log("subscription.endpoint: ", subscription.endpoint);
+self.addEventListener('push', function(event) {
+  console.log('Received a push message', event);
 
-	// TODO: Send the subscription subscription.endpoint
-	// to your server and save it to send a push message
-	// at a later date
-	return sendSubscriptionToServer(subscription);
-	});
-  }).catch(function(err) {
-    // registration failed :(
-    console.log('ServiceWorker registration failed: ', err);
-  });
-}
+  var title = 'You have mail !';
+  var body = 'You have new mail in your mailbox';
+  var icon = '/img/mail-notif.png';
+  var tag = 'new-mail-notification';
 
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: body,
+      icon: icon,
+      tag: tag
+    })
+  );
+});
 
-function sendSubscriptionToServer(subscription) {
-        console.log(subscription);
+self.addEventListener('notificationclick', function(event) {
+  console.log('On notification click: ', event.notification.tag);
+  // Android doesn’t close the notification when you click on it
+  // See: http://crbug.com/463146
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(clients.matchAll({
+    type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url === '/' && 'focus' in client) {
+        return client.focus();
+      }
     }
+    if (clients.openWindow) {
+      return clients.openWindow('/');
+    }
+  }));
+});

@@ -36,6 +36,8 @@ header
           a(href='/')
             i.fa.fa-home
             | Home 
+            
+        
 
         if user
           li.dropdown(class=title=='Account Management'?'active':undefined).menu-right
@@ -74,5 +76,12 @@ header
             ul.dropdown-menu
               li
                 a(href='/mailbox/list') List
+                
+        if user
+            li.dropdown.menu-right
+              a.js-push-button
+                i.fa.fa-home
+                | Enable Push Messages   
+            
               
         

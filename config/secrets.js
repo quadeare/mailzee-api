@@ -26,8 +26,8 @@ module.exports = {
   sessionSecret: process.env.SESSION_SECRET || 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce',
 
   mailgun: {
-    user: process.env.MAILGUN_USER || 'postmaster@sandbox697fcddc09814c6b83718b9fd5d4e5dc.mailgun.org',
-    password: process.env.MAILGUN_PASSWORD || '29eldds1uri6'
+    api_key: 'key-c136de7a3b30fcdd59f4c95c83554b0a',
+    domain: 'mailzee.ovh'
   },
 
   mandrill: {

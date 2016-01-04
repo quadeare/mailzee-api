@@ -3,6 +3,7 @@ var Mailbox = require('../models/Mailbox').Mailbox;
 
 var smsServices = require('../services/sms');
 var gcmServices = require('../services/gcm');
+var emailServices = require('../services/email');
 
 /**
  * POST /signup
@@ -328,13 +329,14 @@ exports.sigfoxNewMail = function(req, res, next) {
           smsServices.sendSMSNotification(notification.phone_number, "You have mail !");
         }
         if (notification.type == 'email') {
+          emailServices.sendEmailNotification(notification.email, res)
         }
         if (notification.type == 'gcm') {
           gcmServices.sendGCMNotification(notification.gcm_id);
         }
       })
 
-      res.send();
+      //res.send();
 
     }
   })

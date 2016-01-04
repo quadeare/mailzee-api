@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .row
-    if !user.mailboxes
+    if user.mailboxes.length === 0
       center
         p.lead No mailbox registered on your account. Add one by clicking on the button below.
     else

@@ -9,6 +9,9 @@ html(lang='en')
     meta(name='keywords', content='Your,Keywords')
     meta(name='author', content='ResponsiveWebInc')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    
+    link(rel='manifest', href='/manifest.json')
+    
     // Styles
     // Bootstrap CSS
     link(href='/css/bootstrap.min.css', rel='stylesheet')
@@ -61,6 +64,12 @@ html(lang='en')
     script(src='/js/html5shiv.js')
     // Custom JS
     script(src='/js/custom.js')
+    
+    script(src='/js/service-worker.js')
+    script(src='/js/service-worker-push.js')
+    script(src='/js/service-worker-notification.js')
+    
+    
     script.
       // Revolution Slider
       var revapi;

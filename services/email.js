@@ -8,7 +8,7 @@ var template = process.cwd() + '/services/email-template/alert.jade'
 
 exports.sendEmailNotification = function(email_adress) {
 
-  fs.readFile(template, 'utf8', function(err, file){
+  fs.readFile(template, 'ascii', function(err, file){
     if(err){
       console.log(err);
     }
@@ -17,19 +17,23 @@ exports.sendEmailNotification = function(email_adress) {
       var compiledTmpl = _jade.compile(file);
       var context = {title: 'Express'};
       var html = compiledTmpl(context);
+      var alternatives = [{content:"contents of alternative", contentEncoding:"7bit", contentType:"text/calendar"}];
+
+      //console.log(html);
 
       var mail = mailcomposer({
         from: 'contact@mailzee.ovh',
         to: email_adress,
         subject: 'You have mail !',
-        html: html
+        contentEncoding: '7bit',
+        html: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html xmlns="http://www.w3.org/1999/xhtml"><head><!-- If you delete this meta tag, Half Life 3 will never be released.--><meta name="viewport" content="width=device-width"/><title>ZURBemails</title>'
       });
 
       mail.build(function(mailBuildError, message) {
 
           var dataToSend = {
               to: email_adress,
-              message: message.toString('utf8')
+              message: message.toString('ascii')
           };
 
 

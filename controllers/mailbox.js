@@ -343,25 +343,30 @@ exports.sigfoxNewMail = function(req, res, next) {
     deviceId: deviceId
   }
 
-  Mailbox.findOne(condition, function(err, mailbox) {
+  Mailbox.find(condition, function(err, mailboxes) {
 
-    if (!mailbox) {
+
+
+    if (!mailboxes) {
       res.status(404).send('Not found');
     }else{
 
-      var notifications = mailbox.notifications;
+      mailboxes.forEach(function (mailbox) {
 
-      notifications.forEach(function (notification) {
-        if (notification.type == 'sms') {
-          smsServices.sendSMSNotification(notification.phone_number, "You have mail !");
-        }
-        if (notification.type == 'email') {
-          emailServices.sendEmailNotification(notification.email, res)
-        }
-        if (notification.type == 'gcm') {
-          gcmServices.sendGCMNotification(notification.gcm_id);
-        }
-      })
+        var notifications = mailbox.notifications;
+
+        notifications.forEach(function (notification) {
+          if (notification.type == 'sms') {
+            smsServices.sendSMSNotification(notification.phone_number, "You have mail !");
+          }
+          if (notification.type == 'email') {
+            emailServices.sendEmailNotification(notification.email, res)
+          }
+          if (notification.type == 'gcm') {
+            gcmServices.sendGCMNotification(notification.gcm_id);
+          }
+        })
+    })
 
       //res.send();
 

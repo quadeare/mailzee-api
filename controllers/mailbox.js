@@ -368,7 +368,7 @@ exports.sigfoxNewMail = function(req, res, next) {
         })
     })
 
-      //res.send();
+      res.send();
 
     }
   })

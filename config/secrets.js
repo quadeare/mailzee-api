@@ -18,7 +18,7 @@
 
  * IMPORTANT  IMPORTANT  IMPORTANT  IMPORTANT  IMPORTANT  IMPORTANT  IMPORTANT
  */
-
+console.log(process.env.APP_URL + "2")
 module.exports = {
 
   db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test',
@@ -52,7 +52,7 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_ID || '548134908724868',
     clientSecret: process.env.FACEBOOK_SECRET || 'dd0d55a4b426b539577c705f137eb4e2',
-    callbackURL: '/auth/facebook/callback',
+    callbackURL: 'https://www.mailzee.ovh' + '/auth/facebook/callback',
     passReqToCallback: true
   },
 
@@ -73,7 +73,7 @@ module.exports = {
   twitter: {
     consumerKey: process.env.TWITTER_KEY || '6NNBDyJ2TavL407A3lWxPFKBI',
     consumerSecret: process.env.TWITTER_SECRET  || 'ZHaYyK3DQCqv49Z9ofsYdqiUgeoICyh6uoBgFfu7OeYC7wTQKa',
-    callbackURL: '/auth/twitter/callback',
+    callbackURL: 'https://www.mailzee.ovh' + '/auth/twitter/callback',
     passReqToCallback: true
   },
 

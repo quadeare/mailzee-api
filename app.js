@@ -35,15 +35,17 @@ var contactController = require('./controllers/contact');
 var mailboxController = require('./controllers/mailbox');
 
 /**
+ * Create Express server.
+ */
+var app = express();
+
+/**
  * API keys and Passport configuration.
  */
 var secrets = require('./config/secrets');
 var passportConf = require('./config/passport');
 
-/**
- * Create Express server.
- */
-var app = express();
+
 
 /**
  * Connect to MongoDB.
@@ -119,8 +121,8 @@ require('./routes/website')(app, oauth2, passport, homeController, userControlle
 if ('development' == app.get('env')) {
    app.use(errorHandler({ dumpExceptions: true, showStack: true }));
    morgan('combined', {
-   skip: function (req, res) { return res.statusCode < 400 }
- })
+     skip: function (req, res) { return res.statusCode < 400 }
+  })
  };
 
 if ('production' == app.get('env')) {
@@ -129,7 +131,6 @@ if ('production' == app.get('env')) {
     skip: function (req, res) { return res.statusCode < 400 }
   })
  };
-
 /**
  * Start Express server.
  */

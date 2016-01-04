@@ -31,13 +31,13 @@ module.exports = function(app, oauth2, passport, homeController, userController,
 
   app.get('/mailbox/:id/notification/sms', loggedIn, mailboxController.smsNotifMailBox);
   app.get('/mailbox/:id/notification/email', loggedIn, mailboxController.emailNotifMailBox);
-  app.get('/mailbox/:id/notification/gcm', loggedIn, mailboxController.gcmNotifMailBox);
-  app.get('/mailbox/:id/notification/chrome', loggedIn, mailboxController.chromeNotifMailBox);
+  app.get('/mailbox/:id/notification/android_gcm', loggedIn, mailboxController.gcmNotifMailBox);
+  app.get('/mailbox/:id/notification/chrome_gcm', loggedIn, mailboxController.chromeNotifMailBox);
 
   app.post('/mailbox/:id/notification/sms', loggedIn, mailboxController.addSMSNotification);
   app.post('/mailbox/:id/notification/email', loggedIn, mailboxController.addEmailNotification);
-  app.post('/mailbox/:id/notification/gcm', loggedIn, mailboxController.addGCMNotification);
-  app.post('/mailbox/:id/notification/chrome', loggedIn, mailboxController.addGCMNotification);
+  app.post('/mailbox/:id/notification/android_gcm', loggedIn, mailboxController.addGCMNotification);
+  app.post('/mailbox/:id/notification/chrome_gcm', loggedIn, mailboxController.addChromeNotification);
 
   app.delete('/mailbox/notification/', loggedIn, mailboxController.removeNotification);
 

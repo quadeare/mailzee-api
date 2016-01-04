@@ -9,15 +9,23 @@ block content
       form.form-horizontal(id='mailbox-form', action="", method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .form-group
+          label.col-sm-3.control-label(for='text') Owner name
+          .col-sm-7
+            .input-group.margin-bottom-sm
+              span.input-group-addon
+                i.fa.fa-user
+              input.form-control(type="text", name="owner_name", id="owner_name", placeholder="Owner name")
+              
+        .form-group
           label.col-sm-3.control-label(for='text') GCM ID (development)
           .col-sm-7
             .input-group.margin-bottom-sm
               span.input-group-addon
-                i.fa.fa-mobile.fa-lg
-              input.form-control(type="text", class="subscriptionId", name="gcm_id", id="gcm_id", placeholder="GCM ID")
+                i.fa.fa-chrome
+              input.form-control(type="text", class="subscriptionId", name="gcm_id", id="gcm_id", placeholder="GCM ID" readonly)
             
         .form-group
           .col-sm-offset-3.col-sm-7
             button.btn.btn-success(type='submit')
-              i.fa.fa-mobile.fa-lg
+              i.fa.fa-chrome
               |  Add Chrome notification

@@ -7,6 +7,7 @@ var mailbox_schema = new mongoose.Schema({
   deviceId: { type: String, default: '' },
   deviceType: { type: String, default: '' },
   notifications: [{
+    owner_name: { type: String, default: '' },
     type: { type: String, default: '' },
     phone_number: { type: String },
     email: { type: String },

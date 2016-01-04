@@ -9,6 +9,14 @@ block content
       form.form-horizontal(id='mailbox-form', action="", method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .form-group
+          label.col-sm-3.control-label(for='text') Owner name
+          .col-sm-7
+            .input-group.margin-bottom-sm
+              span.input-group-addon
+                i.fa.fa-user
+              input.form-control(type="text", name="owner_name", id="owner_name", placeholder="Owner name")
+              
+        .form-group
           label.col-sm-3.control-label(for='text') Email
           .col-sm-7
             .input-group.margin-bottom-sm

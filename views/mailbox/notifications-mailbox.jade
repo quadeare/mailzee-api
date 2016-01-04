@@ -10,21 +10,33 @@ block content
         each notification in mailbox.notifications
           div.list-group-item(href="#").notification-item
               if notification.type == "sms"
-                i.fa.fa-mobile.pull-left.fa-3x
-                h4.list-group-item-heading SMS
+                .col-md-3
+                  i.fa.fa-mobile.pull-left.fa-3x
+                  h4.list-group-item-heading SMS
+          
+                p.list-group-item-text Owner : #{notification.owner_name}
                 p.list-group-item-text Tel : #{notification.phone_number}
               if notification.type == "email"
-                i.fa.fa-envelope.pull-left.fa-2x
-                h4.list-group-item-heading Email
+                .col-md-3
+                  i.fa.fa-envelope.pull-left.fa-2x
+                  h4.list-group-item-heading Email
+                  
+                p.list-group-item-text Owner : #{notification.owner_name}
                 p.list-group-item-text Email : #{notification.email}
-              if notification.type == "gcm"
-                i.fa.fa-mobile.pull-left.fa-3x
-                h4.list-group-item-heading GCM
-                p.list-group-item-text GCM : #{notification.gcm_id}
-              if notification.type == "chrome"
-                i.fa.fa-mobile.pull-left.fa-3x
-                h4.list-group-item-heading GCM
-                p.list-group-item-text GCM : #{notification.gcm_id}
+              if notification.type == "android_gcm"
+                .col-md-3
+                  i.fa.fa-phone.pull-left.fa-2x
+                  h4.list-group-item-heading GCM Device
+
+                p.list-group-item-text Owner : #{notification.owner_name}
+                p.list-group-item-text GCM ID : #{notification.gcm_id}
+              if notification.type == "chrome_gcm"
+                .col-md-3
+                  i.fa.fa-chrome.pull-left.fa-2x
+                  h4.list-group-item-heading Chrome browser
+
+                p.list-group-item-text Owner : #{notification.owner_name}
+                p.list-group-item-text Chrome GCM ID : #{notification.gcm_id}
                 
             div.dropdown.pull-right.notification-dropdown
               button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenu1", data-toggle="dropdown", aria-expanded="true") Action 
@@ -58,11 +70,11 @@ block content
               a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/email")
                 i.fa.fa-envelope
                 | Add an Email notification
-              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/gcm")
+              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/android_gcm")
                 i.fa.fa-mobile.fa-lg
                 | Add a GCM notification
-              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/chrome")
-                i.fa.fa-mobile.fa-lg
+              a(role="menuitem", href="/mailbox/#{mailbox._id}/notification/chrome_gcm")
+                i.fa.fa-chrome
                 | Add a Chrome notification
               //- form.form-horizontal(id='mailbox-form', action="/mailbox/notification/chrome", method='POST')
               //-   input(type='hidden', name='_csrf', value=_csrf)

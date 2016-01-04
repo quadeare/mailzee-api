@@ -226,51 +226,8 @@ exports.chromeNotifMailBox = function(req, res) {
 
 exports.addSMSNotification = function(req, res, next) {
 
-  var condition = {
-    _id: req.params.id,
-    user: req.user.id
-  }
-
-  Mailbox.findOne(condition, function(err, mailbox) {
-
-    mailbox.notifications.push({ type: "sms", phone_number: req.body.phone_number });
-
-    mailbox.save(function(err) {
-      if (err) {
-        return next(err);
-      }
-      req.flash('success', { msg: 'Success! You have added a new sms notification.' });
-      res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
-    });
-  })
-
-};
-
-exports.addEmailNotification = function(req, res, next) {
-
-  var condition = {
-    _id: req.params.id,
-    user: req.user.id
-  }
-
-  Mailbox.findOne(condition, function(err, mailbox) {
-
-    mailbox.notifications.push({ type: "email", email: req.body.email });
-
-    mailbox.save(function(err) {
-      if (err) {
-        return next(err);
-      }
-      req.flash('success', { msg: 'Success! You have added a new email notification.' });
-      res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
-    });
-  });
-
-};
-
-exports.addGCMNotification = function(req, res, next) {
-
-  req.assert('gcm_id', 'GCM ID is not valid').notEmpty();
+  req.assert('phone_number', 'Phone Number is not valid').notEmpty();
+  req.assert('owner_name', 'Owner Name is not valid').notEmpty();
 
   var errors = req.validationErrors();
 
@@ -286,7 +243,103 @@ exports.addGCMNotification = function(req, res, next) {
 
   Mailbox.findOne(condition, function(err, mailbox) {
 
-    mailbox.notifications.push({ type: "gcm", gcm_id: req.body.gcm_id });
+    mailbox.notifications.push({ type: "sms", owner_name: req.body.owner_name, phone_number: req.body.phone_number });
+
+    mailbox.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: 'Success! You have added a new sms notification.' });
+      res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
+    });
+  })
+
+};
+
+exports.addEmailNotification = function(req, res, next) {
+
+  req.assert('email', 'Email is not valid').notEmpty();
+  req.assert('owner_name', 'Owner Name is not valid').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/mailbox/list');
+  }
+
+  var condition = {
+    _id: req.params.id,
+    user: req.user.id
+  }
+
+  Mailbox.findOne(condition, function(err, mailbox) {
+
+    mailbox.notifications.push({ type: "email", owner_name: req.body.owner_name, email: req.body.email });
+
+    mailbox.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: 'Success! You have added a new email notification.' });
+      res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
+    });
+  });
+
+};
+
+exports.addChromeNotification = function(req, res, next) {
+
+  req.assert('gcm_id', 'Chrome GCM ID is not valid').notEmpty();
+  req.assert('owner_name', 'Owner Name is not valid').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/mailbox/list');
+  }
+
+  var condition = {
+    _id: req.params.id,
+    user: req.user.id
+  }
+
+  Mailbox.findOne(condition, function(err, mailbox) {
+
+    mailbox.notifications.push({ type: "chrome_gcm", owner_name: req.body.owner_name, gcm_id: req.body.gcm_id });
+
+    mailbox.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: 'Success! You have added a new GCM notification.' });
+      res.redirect(req.session.returnTo || '/mailbox/'+req.params.id+'/notifications');
+    });
+  });
+
+};
+
+exports.addGCMNotification = function(req, res, next) {
+
+  req.assert('gcm_id', 'GCM ID is not valid').notEmpty();
+  req.assert('owner_name', 'Owner Name is not valid').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/mailbox/list');
+  }
+
+  var condition = {
+    _id: req.params.id,
+    user: req.user.id
+  }
+
+  Mailbox.findOne(condition, function(err, mailbox) {
+
+    mailbox.notifications.push({ type: "android_gcm", owner_name: req.body.owner_name, gcm_id: req.body.gcm_id });
 
     mailbox.save(function(err) {
       if (err) {
@@ -362,7 +415,10 @@ exports.sigfoxNewMail = function(req, res, next) {
           if (notification.type == 'email') {
             emailServices.sendEmailNotification(notification.email, res)
           }
-          if (notification.type == 'gcm') {
+          if (notification.type == 'android_gcm') {
+            gcmServices.sendGCMNotification(notification.gcm_id);
+          }
+          if (notification.type == 'chrome_gcm') {
             gcmServices.sendGCMNotification(notification.gcm_id);
           }
         })

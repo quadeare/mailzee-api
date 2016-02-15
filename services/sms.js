@@ -7,7 +7,7 @@ exports.sendSMSNotification = function(phone_number, message, res) {
       { form: {
         email: 'lacrampe.florian@gmail.com',
         password: 'lc6550',
-        device: '15648',
+        device: '18016',
         number:  phone_number,
         message: message
       } },
